@@ -1,8 +1,8 @@
 # ElasticActivities
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/elastic_activities`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is used to store your application logs in ElasticSearch
+Before using this gem please make sure ElasticSearch is installed in your matchine. You can download it from "https://www.elastic.co/products/elasticsearch"
+Requred rails version is 5.1
 
 ## Installation
 
@@ -14,7 +14,7 @@ gem 'elastic_activities'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -22,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute following command to generate the initializers
+
+    $ rails g elastic_index
+
+You will be prompted to enter 'Enter elastic index name' & 'Enter elastic url'
+The details which you will enter will be the locations wher your application logs will be stored.
+
+Add following inside your ApplicationController
+
+    before_action :add_logs
 
 ## Development
 

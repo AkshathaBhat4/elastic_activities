@@ -1,0 +1,21 @@
+{
+    "settings": {
+        "number_of_shards": 10,
+        "number_of_replicas": 0
+    },
+    "mappings": {
+        "logs": {
+            "_all" : {"enabled": false},
+            "properties": {
+                "url": {"type": "keyword"},
+                "action": {"type": "keyword"},
+                "controller": {"type": "keyword"},
+                "parameters": {"type": "object"},
+                "ip_address": {"type": "ip", "index": true },
+                "browser": {"type": "keyword" },
+                "user_email": {"type": "keyword" },
+                "datetime": {"type": "date", "format": "yyyy-MM-dd HH:mm", "index": true}
+            }
+        }
+    }
+}

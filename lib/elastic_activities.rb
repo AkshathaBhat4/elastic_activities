@@ -1,4 +1,5 @@
 require "elastic_activities/version"
+require "elastic_activities/geo_location"
 
 module ElasticActivities
   # Your code goes here...
@@ -15,6 +16,8 @@ module ElasticActivities
   private
 
   def log_json
+    geo_location = GeoLocation.new(ip: request.remote_ip)
+    geo_location.get_details
     json_data = {
       url: request.url,
       action: params[:action],
@@ -22,7 +25,18 @@ module ElasticActivities
       parameters: params.except(*[:action, :controller]),
       ip_address: request.remote_ip,
       browser: request.env['HTTP_USER_AGENT'],
-      datetime: DateTime.now.strftime("%Y-%m-%d %H:%M")
+      datetime: DateTime.now.strftime("%Y-%m-%d %H:%M"),
+      as: geo_location.as,
+      city: geo_location.city,
+      country: geo_location.country,
+      country_code: geo_location.country_code,
+      isp: geo_location.isp,
+      org: geo_location.org,
+      region: geo_location.region,
+      region_name: geo_location.region_name,
+      timezone: geo_location.timezone,
+      zip: geo_location.zip,
+      geo_points: geo_location.geo_points
     }
     json_data.merge!({user_email: current_user.email}) if self.respond_to?(:current_user) && current_user.present?
     json_data

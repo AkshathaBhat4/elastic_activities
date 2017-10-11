@@ -14,7 +14,18 @@
                 "ip_address": {"type": "ip", "index": true },
                 "browser": {"type": "keyword" },
                 "user_email": {"type": "keyword" },
-                "datetime": {"type": "date", "format": "yyyy-MM-dd HH:mm", "index": true}
+                "datetime": {"type": "date", "format": "yyyy-MM-dd HH:mm", "index": true},
+                "geo_points": {"type": "geo_point"},
+                "as": {"type": "keyword"},
+                "city": {"type": "keyword"},
+                "country": {"type": "keyword"},
+                "countryCode": {"type": "keyword"},
+                "isp": {"type": "keyword"},
+                "org": {"type": "keyword"},
+                "region": {"type": "keyword"},
+                "region_name": {"type": "keyword"},
+                "timezone": {"type": "keyword"},
+                "zip": {"type": "keyword"}
             }
         }
     }

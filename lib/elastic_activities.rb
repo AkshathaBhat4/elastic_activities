@@ -1,5 +1,6 @@
 require "elastic_activities/version"
 require "elastic_activities/geo_location"
+require "user_agent"
 
 module ElasticActivities
   # Your code goes here...
@@ -18,13 +19,17 @@ module ElasticActivities
   def log_json
     geo_location = GeoLocation.new(ip: request.remote_ip)
     geo_location.get_details
+    user_agent = UserAgent.parse(request.env['HTTP_USER_AGENT'])
     json_data = {
       url: request.url,
       action: params[:action],
       controller: params[:controller],
       parameters: params.except(*[:action, :controller]),
       ip_address: request.remote_ip,
-      browser: request.env['HTTP_USER_AGENT'],
+      browser: user_agent.browser,
+      browser_version: user_agent.version.to_s,
+      platform: user_agent.platform,
+      os: user_agent.os,
       datetime: DateTime.now.strftime("%Y-%m-%d %H:%M"),
       as: geo_location.as,
       city: geo_location.city,

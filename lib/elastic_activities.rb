@@ -30,7 +30,7 @@ module ElasticActivities
       browser_version: user_agent.version.to_s,
       platform: user_agent.platform,
       os: user_agent.os,
-      datetime: DateTime.now.strftime("%Y-%m-%d %H:%M"),
+      datetime: DateTime.now.utc.strftime("%Y-%m-%d %H:%M"),
       as: geo_location.as,
       city: geo_location.city,
       country: geo_location.country,

@@ -12,11 +12,11 @@ module ElasticActivities
       @as = json_data['as']
       @city = json_data['city']
       @country = json_data['country']
-      @country_code = json_data['country_code']
+      @country_code = json_data['countryCode']
       @isp = json_data['isp']
       @org = json_data['org']
       @region = json_data['region']
-      @region_name = json_data['region_name']
+      @region_name = json_data['regionName']
       @timezone = json_data['timezone']
       @zip = json_data['zip']
       @geo_points = {

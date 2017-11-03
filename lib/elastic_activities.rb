@@ -4,7 +4,7 @@ require "user_agent"
 
 module ElasticActivities
   # Your code goes here...
-  mattr_accessor :index_name, :elastic_url
+  mattr_accessor :index_name, :elastic_url, :skip_params
 
   def self.setup
     yield self

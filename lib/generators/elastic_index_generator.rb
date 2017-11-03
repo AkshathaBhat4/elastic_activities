@@ -12,6 +12,10 @@ class ElasticIndexGenerator < Rails::Generators::Base
 ElasticActivities.setup do |config|
   config.index_name = '#{index_name}'
   config.elastic_url = '#{elastic_url}'
+  # skip few parameter values which you don't want to store in your elastic logs.
+  # its accepts data in following format
+  # [:action, :controller, { user: [:name]}]
+  config.skip_params = [:action, :controller]
 end
     FILE
 

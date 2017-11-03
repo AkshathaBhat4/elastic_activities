@@ -24,7 +24,7 @@ module ElasticActivities
       url: request.url,
       action: params[:action],
       controller: params[:controller],
-      parameters: params.except(*[:action, :controller]),
+      parameters: required_params(params),
       ip_address: request.remote_ip,
       browser: user_agent.browser,
       browser_version: user_agent.version.to_s,
@@ -45,6 +45,18 @@ module ElasticActivities
     }
     json_data.merge!({user_email: current_user.email}) if self.respond_to?(:current_user) && current_user.present?
     json_data
+  end
+
+  def required_params(params_list, skip_params_list=skip_params)
+    skip_keys = skip_params_list.select{|a| a if a.is_a?(String)}
+    skip_objects = skip_params_list.select{|a| a if a.is_a?(Hash)}
+    params_hash = params_list.except(*skip_keys)
+    skip_objects.each do |object_hash|
+      object_hash.each do |key, value|
+        next if params_hash[key].blank?
+        params_hash[key] = required_params(params_hash[key], value)
+      end
+    end
   end
 
 end

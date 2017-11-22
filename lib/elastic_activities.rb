@@ -57,6 +57,7 @@ module ElasticActivities
         params_hash[key] = required_params(params_hash[key], value)
       end
     end
+    params_hash
   end
 
 end

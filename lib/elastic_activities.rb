@@ -47,7 +47,7 @@ module ElasticActivities
     json_data
   end
 
-  def required_params(params_list, skip_params_list=skip_params)
+  def required_params(params_list, skip_params_list=self.skip_params)
     skip_keys = skip_params_list.select{|a| a if a.is_a?(String)}
     skip_objects = skip_params_list.select{|a| a if a.is_a?(Hash)}
     params_hash = params_list.except(*skip_keys)

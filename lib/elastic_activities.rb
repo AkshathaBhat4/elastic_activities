@@ -11,6 +11,7 @@ module ElasticActivities
   end
 
   def add_logs
+    Rails.logger.info("#{log_json}+++++++++++")
     `curl -XPOST http://#{self.elastic_url}/#{self.index_name}/logs -d '#{log_json.to_json}'`
   end
 
